@@ -11,6 +11,106 @@
 				"type": "constructor"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "oldOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnerChanged",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "author",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint16",
+						"name": "tweetId",
+						"type": "uint16"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "content",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "TweetCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "liker",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "tweetAuthor",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint16",
+						"name": "tweetId",
+						"type": "uint16"
+					}
+				],
+				"name": "TweetLiked",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "unliker",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "tweetAuthor",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint16",
+						"name": "tweetId",
+						"type": "uint16"
+					}
+				],
+				"name": "TweetUnliked",
+				"type": "event"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -288,11 +388,11 @@
 	},
 	"sources": {
 		".states/Contracts/twitter.sol": {
-			"keccak256": "0xd620fbb3a57a6cf387a7c6e9ca795f8f1f7fa8d06816d65a43b7ad6c22ac6796",
+			"keccak256": "0xa3c9246e9f1945385bf847a32dc09bb95684784ed5d5ba51e349f6ba21fa9610",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6a5b18972b76e03c0c17e01d5c78893eddfcea68ff295db80bcb5cf56cb7637c",
-				"dweb:/ipfs/QmV5LYGha2uW2kFJgRMW18q21VKPccWbmwrUxTTke1PapN"
+				"bzz-raw://61eb2e16ade080c50319488fbb12b3ceaddd0a5bc5ec41f967019a62d6be3ba2",
+				"dweb:/ipfs/QmcFu5f5SZR5jRKDhQ4oQeioAyYSdtdW17mZuBN4bDyBFX"
 			]
 		}
 	},

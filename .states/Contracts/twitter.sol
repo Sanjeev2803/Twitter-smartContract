@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+
 contract Tweet {
     struct TweetInfo {
         uint16 id;               // Unique ID for each tweet of a user
@@ -15,7 +16,10 @@ contract Tweet {
     constructor() {
         owner = msg.sender;
     }
-
+event TweetCreated(address indexed author, uint16 tweetId, string content, uint256 timestamp);
+    event TweetLiked(address indexed liker, address indexed tweetAuthor, uint16 tweetId);
+    event TweetUnliked(address indexed unliker, address indexed tweetAuthor, uint16 tweetId);
+    event OwnerChanged(address indexed oldOwner, address indexed newOwner);
     modifier isOwner() {
         require(owner == msg.sender, "You are not the owner!");
         _;
@@ -29,6 +33,7 @@ contract Tweet {
 
     function changeOwner(address newOwner) public isOwner {
         owner = newOwner;
+        emit OwnerChanged(msg.sender, newOwner);
     }
 
     // Mapping each user address to an array of their tweets
@@ -44,7 +49,8 @@ contract Tweet {
             timestamp: block.timestamp,
             likes: 0
         });
-        tweets[msg.sender].push(newTweet); // Push the new tweet to the user's tweet array
+        tweets[msg.sender].push(newTweet);// Push the new tweet to the user's tweet array
+        emit TweetCreated(msg.sender, tweetId, tweet, block.timestamp); 
         return newTweet;
     }
 
@@ -52,16 +58,19 @@ contract Tweet {
     function likeTweet(address tweetOfUser, uint16 tweetId) external {
         require(tweetId < tweets[tweetOfUser].length, "Tweet does not exist");
         tweets[tweetOfUser][tweetId].likes += 1; // Increment the likes for the tweet
+        emit TweetLiked(msg.sender, tweetOfUser, tweetId);
     }
 
     // Function to unlike a specific tweet by a user using the hasLikes modifier
     function unlikeTweet(address tweetOfUser, uint16 tweetId) external hasLikes(tweetOfUser, tweetId) {
         tweets[tweetOfUser][tweetId].likes -= 1; // Decrement the likes for the tweet
+        emit TweetUnliked(msg.sender, tweetOfUser, tweetId);
     }
 
     // Function to get a tweet by ID for a specific user
     function getTweetById(address particularUser, uint256 id) public view returns (TweetInfo memory) {
         require(id < tweets[particularUser].length, "Tweet does not exist");
+        
         return tweets[particularUser][id]; // Access the specific tweet by its ID
     }
 
